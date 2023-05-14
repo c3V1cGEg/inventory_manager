@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+  <span th:fragment="rfidScripts">
+    <script th:src="@{/js/rfid.js?1}" type="text/javascript"></script>
+    <script>
+      function doGet(url) {
+          let xhr = new XMLHttpRequest();
+          xhr.open("GET", url, true);
+          xhr.send();
+      }
+    </script>
+    <style>
+      button {
+          width: 250px;
+      }
+    </style>
+  </span>
+
+  <table th:fragment="rfidConsole">
+    <tr>
+      <td>
+        <button id="scanButton">Scan</button>
+        <button id="writeButton">Write</button>
+        <button id="makeReadOnlyButton">Make Read-Only</button>
+        <br>
+        <br>
+        <textarea id="logconsole" cols="50" rows="20"></textarea>
+        <br>
+        Serial: <input id="serialNumber" type="text">
+      </td>
+    </tr>
+  </table>
+
+  <input th:fragment="rfidTextField" type="text" id="serialNumber" />
+
+</body>
+</html>

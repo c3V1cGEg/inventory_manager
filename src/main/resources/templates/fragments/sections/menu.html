@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="menu">
+    <table style="width: 100px;">
+        <tr>
+            <td>
+                <a th:href="@{/inventory/add}">Add</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/inventory/list}">List</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

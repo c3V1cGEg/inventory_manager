@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="content">
+    <tr>
+        <td>
+            <form method="post" th:action="@{/inventory/save}" th:object="${inventory}">
+                <input name="id" value="" type="hidden"/>
+                <table>
+                    <tr>
+                        <td>Inventory type</td>
+                        <td>
+                            <select name="type" id="type">
+                                <option th:each="formType : ${formTypes}" th:value="${formType}" th:text="${formType}" th:selected="${formType == inventory.type}"></option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Tag id</td>
+                        <td>
+                            <input name="tagId" value="456" type="text"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Tag type</td>
+                        <td>
+                            <select name="tagType" id="tagType">
+                                <option th:each="tagType : ${tagTypes}" th:value="${tagType}" th:text="${tagType}" th:selected="${tagType == inventory.tagType}"></option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Short description</td>
+                        <td>
+                            <input name="shortDescription" value="short desc" type="text"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <input name="description" value="desc" type="text"/>
+                        </td>
+                    </tr>
+
+                    <div th:replace="~{ 'fragments/sections/forms/' + ${type} :: ${type} }"></div>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Save">
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+server:
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:certificate/brick2/brick2.p12
+    key-store-password: brick2
+    key-alias: 1
+  port: 8888
+
+spring:
+  datasource:
+    url: jdbc:mysql://brick2.xtu:13306/realestate
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: false
+
+  thymeleaf:
+      suffix: .html
+      mode: HTML
+      encoding: UTF-8
+      cache: false
+      content-type: text/html

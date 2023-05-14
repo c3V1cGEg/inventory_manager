@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="content" style="width: 100%;">
+    <tr>
+        <td style="vertical-align: top; width: 100%;">
+            <table border="1" style="width: 100%;">
+                <thead>
+                    <th>Type</th>
+                    <th>Short description</th>
+                    <th>Description</th>
+                    <th>Tag type</th>
+                    <th></th>
+                </thead>
+
+                <tr th:each="item : ${inventoryList.content}" th:object="${item}">
+                    <td th:text="${item.type}"></td>
+                    <td th:text="${item.shortDescription}"></td>
+                    <td th:text="${item.description}"></td>
+                    <td th:text="${item.tagType}"></td>
+                    <td>Edit</td>
+                </tr>
+
+            </table>
+            <span th:replace="~{ fragments/sections/pagination :: pagination(${inventoryList}) }"></span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
