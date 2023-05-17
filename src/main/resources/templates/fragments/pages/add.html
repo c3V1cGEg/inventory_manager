@@ -5,8 +5,8 @@
     <tr>
         <td>
             <form method="post" th:action="@{/inventory/save}" th:object="${inventory}">
-                <input name="id" value="" type="hidden"/>
-                <table>
+                <input name="id" th:value="${inventory.id}" type="hidden"/>
+                <table class="striped">
                     <tr>
                         <td>Inventory type</td>
                         <td>
@@ -19,7 +19,7 @@
                     <tr>
                         <td>Tag id</td>
                         <td>
-                            <input name="tagId" value="456" type="text"/>
+                            <input name="tagId" th:value="${inventory.tagId}" type="text"/>
                         </td>
                     </tr>
 
@@ -27,7 +27,7 @@
                         <td>Tag type</td>
                         <td>
                             <select name="tagType" id="tagType">
-                                <option th:each="tagType : ${tagTypes}" th:value="${tagType}" th:text="${tagType}" th:selected="${tagType == inventory.tagType}"></option>
+                                <option th:each="tagType : ${tagTypes}" th:value="${inventory.tagType}" th:text="${tagType}" th:selected="${tagType == inventory.tagType}"></option>
                             </select>
                         </td>
                     </tr>
@@ -35,18 +35,17 @@
                     <tr>
                         <td>Short description</td>
                         <td>
-                            <input name="shortDescription" value="short desc" type="text"/>
+                            <input name="shortDescription" th:value="${inventory.shortDescription}" type="text"/>
                         </td>
                     </tr>
 
                     <tr>
                         <td>Description</td>
                         <td>
-                            <input name="description" value="desc" type="text"/>
+                            <input name="description" th:value="${inventory.description}" type="text"/>
                         </td>
                     </tr>
-
-                    <div th:replace="~{ 'fragments/sections/forms/' + ${type} :: ${type} }"></div>
+                    <div th:replace="~{ 'fragments/sections/forms/' + ${inventory.type} :: content }"></div>
 
                     <tr>
                         <td></td>

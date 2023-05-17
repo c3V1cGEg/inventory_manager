@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<span th:fragment="pagination(pageable, pageUrl)" >
+  <span th:if="${pageable.totalPages > 0}" th:each="pageNumber : ${#numbers.sequence(0, pageable.totalPages - 1)}"  th:with="sortColumn=${param.sort}, sortDirection=${param.dir}">
+      <a th:if="${pageNumber != pageable.number && !#strings.isEmpty(sortColumn)}" th:href="@{${pageUrl}(page=${pageNumber}, sort=${sortColumn}, dir=${sortDirection})}" th:text="${pageNumber + 1}"></a>
+      <a th:if="${pageNumber != pageable.number && #strings.isEmpty(sortColumn)}" th:href="@{${pageUrl}(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+      <span th:if="${pageNumber == pageable.number}"  th:text="${pageNumber + 1}"></span>
+  </span>
+</span>
+
+<span th:fragment="headerLink(columnName, sortField, pageable, pageUrl)" >
+    <a th:if="${pageable.sort.getOrderFor(sortField)}"
+       th:href="@{${pageUrl}(page=${pageable.number},sort=${sortField},dir=${opDir[pageable.sort.getOrderFor(sortField).getDirection().name()]})}"
+       th:text="${columnName}"></a>
+
+    <a th:unless="${pageable.sort.getOrderFor(sortField)}"
+       th:href="@{${pageUrl}(page=${pageable.number},sort=${sortField},dir=ASC)}"
+       th:text="${columnName}"></a>
+</span>
+
+</body>
+</html>

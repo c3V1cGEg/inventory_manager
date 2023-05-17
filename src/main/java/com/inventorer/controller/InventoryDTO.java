@@ -9,7 +9,7 @@ public class InventoryDTO {
   String shortDescription;
   String description;
   String type;
-  Map<String, String> jsonData;
+  Map<String, Object> jsonData;
 
   public Long getId() {
     return id;
@@ -43,11 +43,11 @@ public class InventoryDTO {
     this.type = type;
   }
 
-  public Map<String, String> getJsonData() {
+  public Map<String, Object> getJsonData() {
     return jsonData;
   }
 
-  public void setJsonData(Map<String, String> jsonData) {
+  public void setJsonData(Map<String, Object> jsonData) {
     this.jsonData = jsonData;
   }
 

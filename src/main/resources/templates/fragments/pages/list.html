@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<table th:fragment="content" style="width: 100%;">
+<table th:fragment="content" border="0" style="width: 100%; height: 200px;">
     <tr>
         <td style="vertical-align: top; width: 100%;">
             <table border="1" style="width: 100%;">
-                <thead>
-                    <th>Type</th>
-                    <th>Short description</th>
-                    <th>Description</th>
-                    <th>Tag type</th>
-                    <th></th>
-                </thead>
-
-                <tr th:each="item : ${inventoryList.content}" th:object="${item}">
-                    <td th:text="${item.type}"></td>
-                    <td th:text="${item.shortDescription}"></td>
-                    <td th:text="${item.description}"></td>
-                    <td th:text="${item.tagType}"></td>
-                    <td>Edit</td>
+                <tr>
+                    <td>
+                        <form th:action="@{/inventory/search}" method="get">
+                            <input type="text" name="phrase" th:value="${phrase}">
+                            <input type="submit" value="Search">
+                        </form>
+                    </td>
                 </tr>
-
             </table>
-            <span th:replace="~{ fragments/sections/pagination :: pagination(${inventoryList}) }"></span>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top; width: 100%; height: 100%;">
+            <table class="striped" border="1" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th th:insert="~{ fragments/sections/table :: headerLink('Type', 'type', ${inventoryList}, ${pageUrl}) }"></th>
+                        <th th:insert="~{ fragments/sections/table :: headerLink('Short description', 'short_description', ${inventoryList}, ${pageUrl}) }"></th>
+                        <th th:insert="~{ fragments/sections/table :: headerLink('Description', 'description', ${inventoryList}, ${pageUrl}) }"></th>
+                        <th th:insert="~{ fragments/sections/table :: headerLink('Tag type', 'tag_type', ${inventoryList}, ${pageUrl}) }"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${inventoryList.content}" th:object="${item}">
+                        <td th:text="${item.type}"></td>
+                        <td th:text="${item.shortDescription}"></td>
+                        <td th:text="${item.description}"></td>
+                        <td th:text="${item.tagType}"></td>
+                        <td><a th:href="@{/inventory/edit(id=${item.id})}">Edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top; width: 100%; height: 20px;">
+            <span th:replace="~{ fragments/sections/table :: pagination(${inventoryList}, ${pageUrl}) }"></span>
         </td>
     </tr>
 </table>

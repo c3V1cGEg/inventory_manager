@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<div th:fragment="content">
+    <tr>
+        <td>Serial number</td>
+        <td>
+            <input name="jsonData['serial']" th:value="${inventory.dataJson['serial']}" type="text"/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Price</td>
+        <td>
+            <input name="jsonData['price']" th:value="${inventory.dataJson['price']}" type="text"/>
+        </td>
+    </tr>
+</div>
 
 </body>
 </html>

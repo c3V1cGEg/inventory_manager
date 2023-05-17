@@ -1,15 +1,13 @@
 package com.inventorer;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 @Component
 public class InventoryFormTypes {
@@ -18,24 +16,11 @@ public class InventoryFormTypes {
   List<String> formTypesList;
 
   public InventoryFormTypes() throws Exception {
-    String[] list = ResourceUtils.getFile("classpath:forms").list();
-
-    formTypes = Arrays.stream(list).collect(Collectors.toMap(file -> file.substring(0, file.indexOf('.')), file -> {
-      JsonObject jsonElement = null;
-      try {
-        File absoluteFile = ResourceUtils.getFile("classpath:forms/" + file).getAbsoluteFile();
-        String s = Files.readString(absoluteFile.toPath());
-        jsonElement = (JsonObject) JsonParser.parseString(s);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-
-      return jsonElement;
-    }));
-
-    List<String> s = new ArrayList<>(formTypes.keySet());
-    Collections.sort(s);
-    formTypesList = s;
+    String[] list = ResourceUtils.getFile("classpath:templates/fragments/sections/forms").list();
+    formTypesList = Arrays.stream(list)
+        .map(s -> s.substring(0, s.lastIndexOf(".")))
+        .sorted()
+        .toList();
   }
 
   public Map<String, JsonObject> getFormTypes() {

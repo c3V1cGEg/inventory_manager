@@ -6,18 +6,18 @@
 </head>
 <body>
 
-<div th:fragment="general">
+<div th:fragment="content">
     <tr>
         <td>Serial number</td>
         <td>
-            <input name="jsonData['serial']" value="123456" type="text"/>
+            <input name="jsonData['serial']" th:value="${inventory.dataJson['serial']}" type="text"/>
         </td>
     </tr>
 
     <tr>
         <td>Price</td>
         <td>
-            <input name="jsonData['price']" value="16.1" type="text"/>
+            <input name="jsonData['price']" th:value="${inventory.dataJson['price']}" type="text"/>
         </td>
     </tr>
 </div>
